@@ -1,63 +1,71 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Sinatra + Twitter Bootstrap</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- Bootstrap -->
-		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-		  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-		<![endif]-->
-	</head>
-	<body>
-		<div class="container">
+    <title>Flow Demo</title>
 
-			<!-- Static navbar -->
-			<nav class="navbar navbar-default" role="navigation">
-			  <div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-			      <span class="sr-only">Toggle navigation</span>
-			      <span class="icon-bar"></span>
-			      <span class="icon-bar"></span>
-			      <span class="icon-bar"></span>
-			    </button>
-			    <a class="navbar-brand" href="/">Sinatra + Twitter Bootstrap</a>
-			  </div>
-			  <div class="navbar-collapse collapse">
-			    <ul class="nav navbar-nav">
-			      <li><a href="/secure/place">Secret</a></li>
-			    </ul>
-			    <ul class="nav navbar-nav navbar-right">
-			        <li class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=username%> <b class="caret"></b></a>
-			        <ul class="dropdown-menu">
-			            <li><a href="/login/form">Login</a></li>
-			            <li class="divider"></li>
-			            <li><a href="/logout">Logout</a></li>
-			        </ul>
-			      </li>
+    <!-- Bootstrap core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-			    </ul>
-			  </div><!--/.nav-collapse -->
-			</nav>
+    <!-- Custom styles for this template -->
+    <link href="/css/jumbotron.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
 
-			<div>
-			      <%if @error then %>
-			          <div class="alert alert-error"><%=@error%></div>
-			      <% end %>
-			      <%= yield %>
-			</div>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="/vendor/bootstrap/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/vendor/bootstrap/js/ie-emulation-modes-warning.js"></script>
 
-	</div>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <span class="navbar-brand"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="main">
+        <%= yield %>
+
+        <hr/>
+
+        <footer>
+          <center>
+            Made with ❤ by <a href="http://gocardless.com">GoCardless Engineering</a>
+          </center>
+        </footer>
+      </div>
+
+    </div><!-- /.container -->
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="/vendor/jquery-1.9.1.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/vendor/bootstrap/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
