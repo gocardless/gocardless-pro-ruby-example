@@ -27,7 +27,7 @@ API = RestClient::Resource.new(API_URL,
                                password: API_KEY_SECRET,
                                headers: HEADERS)
 
-# Before every request, make sure visitors get assigned a session ID.
+# Before every request, make sure visitors have been assigned a session ID.
 before do
   session[:token] ||= SecureRandom.uuid
 end
