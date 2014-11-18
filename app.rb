@@ -5,10 +5,8 @@ require 'base64'
 require 'securerandom'
 require 'json'
 
-configure do
-  enable :sessions
-end
-set :session_secret, 'IMASECRETYAY'
+enable :sessions
+set :session_secret, 'im_a_secret_yay!'
 
 # Pull API keys & creditor from the environment
 CREDITOR_ID = ENV['CREDITOR_ID']
