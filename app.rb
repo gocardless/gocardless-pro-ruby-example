@@ -5,6 +5,7 @@ require 'base64'
 require 'securerandom'
 require 'json'
 
+# Enable sessions
 enable :sessions
 set :session_secret, 'im_a_secret_yay!'
 
