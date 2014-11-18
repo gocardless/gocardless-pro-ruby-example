@@ -10,21 +10,24 @@ configure do
 end
 set :session_secret, 'IMASECRETYAY'
 
+# Pull API keys & creditor from the environment
 CREDITOR_ID = ENV['CREDITOR_ID']
 API_KEY_ID = ENV['API_KEY_ID']
 API_KEY_SECRET = ENV['API_KEY_SECRET']
+
 API_URL = "https://api-staging.gocardless.com"
 HEADERS = {
   'GoCardless-Version' => '2014-11-03',
   'Content-Type' => 'application/json'
 }
 
+# Initialize the API client
 API = RestClient::Resource.new(API_URL,
                                user: API_KEY_ID,
                                password: API_KEY_SECRET,
                                headers: HEADERS)
 
-# Before every request, make sure they get assigned a session ID.
+# Before every request, make sure visitors get assigned a session ID.
 before do
   session[:token] ||= SecureRandom.uuid
 end
@@ -34,7 +37,7 @@ get '/' do
   erb :index
 end
 
-# DVLA kicks off
+# DVLA kicks off a redirection flow
 post '/purchase' do
   package = params[:package]
   uri = URI.parse(request.env["REQUEST_URI"])
@@ -55,7 +58,7 @@ post '/purchase' do
   redirect JSON.parse(response)["redirect_flows"]["redirect_url"]
 end
 
-# Hit when customer has gone through our flow pages
+# Customer returns from GC flow pages
 get '/payment_complete' do
   redirect_flow_id = params[:redirect_flow_id]
 
