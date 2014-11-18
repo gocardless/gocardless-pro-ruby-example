@@ -67,6 +67,7 @@ get '/payment_complete' do
       session_token: session[:token]
     }
   }
+  
   API["/redirect_flows/#{redirect_flow_id}/actions/complete"].post payload.to_json
   redirect "/thankyou?package=#{params[:package]}"
 end
