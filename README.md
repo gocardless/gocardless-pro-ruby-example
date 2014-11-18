@@ -1,22 +1,11 @@
-Hello!
-====
-
-This is a demonstrator for [Sinatra](http://www.sinatrarb.com/) and [Twitter Bootstrap](http://getbootstrap.com/). 
-
-Use it as a boilerplate to start your own apps.
-
-Go!
+Getting Started
 ===
 
-Download and run sinatra-bootstrap:
-
-    git clone https://github.com/bootstrap-ruby/sinatra-bootstrap
-    
-    cd sinatra-bootstrap
+    git clone https://github.com/gocardless/flow-demo-app
+    cd flow-demo-app
     bundle install             # To install sinatra
-    
     bundle exec ruby app.rb    # To run the sample
-	
+
 Then open [http://localhost:4567/](http://localhost:4567/)
 
 What's next?
