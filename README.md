@@ -1,6 +1,6 @@
 # GoCardless Flow Demo App
 
-A simple example app which demonstrates usage of the GoCardless Pro redirect flow to serve hosted payment pages.
+A simple demo of using the GoCardless Pro redirect flow to serve hosted payment pages.
 
 ## Running Locally
 
