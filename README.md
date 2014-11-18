@@ -4,7 +4,7 @@ Getting Started
     git clone https://github.com/gocardless/flow-demo-app
     cd flow-demo-app
     bundle install             # To install sinatra
-    bundle exec ruby app.rb    # To run the sample
+    USERNAME=api_key_id PASSWORD=api_key_secret CREDITOR_ID=xxx bundle exec ruby app.rb    # To run the sample
 
 Then open [http://localhost:4567/](http://localhost:4567/)
 
