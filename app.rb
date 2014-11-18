@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'sinatra'
 require 'rest_client'
-require 'base64'
 require 'securerandom'
 require 'json'
 
