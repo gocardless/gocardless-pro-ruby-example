@@ -46,6 +46,7 @@ post '/purchase' do
       description: "#{package.capitalize} License - £#{rand(1..5)*50}",
       session_token: session[:token],
       success_redirect_url: success_url,
+      scheme: 'bacs',
       links: {
         creditor: CREDITOR_ID
       }
@@ -65,7 +66,7 @@ get '/payment_complete' do
       session_token: session[:token]
     }
   }
-  
+
   API["/redirect_flows/#{redirect_flow_id}/actions/complete"].post payload.to_json
   redirect "/thankyou?package=#{params[:package]}"
 end
