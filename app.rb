@@ -3,6 +3,7 @@ require 'sinatra'
 require 'rest_client'
 require 'securerandom'
 require 'json'
+require 'prius'
 
 # Enable sessions
 enable :sessions
