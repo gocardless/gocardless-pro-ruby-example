@@ -1,14 +1,8 @@
-GIT
-  remote: git@github.com:gocardless/prius.git
-  revision: 76e239c47af14300bd917016c1f5fdabb43b9274
-  tag: v0.2.0
-  specs:
-    prius (0.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
     netrc (0.7.9)
+    prius (0.2.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
@@ -24,6 +18,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  prius!
+  prius (~> 0.2)
   rest_client
   sinatra
