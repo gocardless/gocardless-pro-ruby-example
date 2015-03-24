@@ -13,14 +13,14 @@ CREDITOR_ID = ENV['CREDITOR_ID']
 API_KEY_ID = ENV['API_KEY_ID']
 API_KEY_SECRET = ENV['API_KEY_SECRET']
 
-API_URL = "https://api-staging.gocardless.com"
+API_ENDPOINT = ENV["API_ENDPOINT"]
 HEADERS = {
-  'GoCardless-Version' => '2014-11-03',
+  'GoCardless-Version' => ENV["API_VERSION"],
   'Content-Type' => 'application/json'
 }
 
 # Initialize the API client
-API = RestClient::Resource.new(API_URL,
+API = RestClient::Resource.new(API_ENDPOINT,
                                user: API_KEY_ID,
                                password: API_KEY_SECRET,
                                headers: HEADERS)
