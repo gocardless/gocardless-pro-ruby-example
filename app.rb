@@ -9,14 +9,21 @@ require 'prius'
 enable :sessions
 set :session_secret, 'im_a_secret_yay!'
 
-# Pull API keys & creditor from the environment
+# Load Environment Variables
+Prius.load(:creditor_id)
+Prius.load(:api_key_id)
+Prius.load(:api_key_secret)
+Prius.load(:api_endpoint)
+Prius.load(:api_version)
+
 CREDITOR_ID = Prius.get(:creditor_id)
 API_KEY_ID = Prius.get(:api_key_id)
 API_KEY_SECRET = Prius.get(:api_key_secret)
 API_ENDPOINT = Prius.get(:api_endpoint)
+API_VERSION = Prius.get(:api_version)
 
 HEADERS = {
-  'GoCardless-Version' => Prius.get(:api_version),
+  'GoCardless-Version' => API_VERSION,
   'Content-Type' => 'application/json'
 }
 
