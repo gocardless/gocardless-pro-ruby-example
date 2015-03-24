@@ -9,13 +9,13 @@ enable :sessions
 set :session_secret, 'im_a_secret_yay!'
 
 # Pull API keys & creditor from the environment
-CREDITOR_ID = ENV['CREDITOR_ID']
-API_KEY_ID = ENV['API_KEY_ID']
-API_KEY_SECRET = ENV['API_KEY_SECRET']
+CREDITOR_ID = Prius.get(:creditor_id)
+API_KEY_ID = Prius.get(:api_key_id)
+API_KEY_SECRET = Prius.get(:api_key_secret)
+API_ENDPOINT = Prius.get(:api_endpoint)
 
-API_ENDPOINT = ENV["API_ENDPOINT"]
 HEADERS = {
-  'GoCardless-Version' => ENV["API_VERSION"],
+  'GoCardless-Version' => Prius.get(:api_version),
   'Content-Type' => 'application/json'
 }
 
