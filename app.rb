@@ -9,18 +9,18 @@ enable :sessions
 set :session_secret, 'im_a_secret_yay!'
 
 # Pull API keys & creditor from the environment
-CREDITOR_ID = ENV['CREDITOR_ID']
-API_KEY_ID = ENV['API_KEY_ID']
-API_KEY_SECRET = ENV['API_KEY_SECRET']
+CREDITOR_ID = Prius.get(:creditor_id)
+API_KEY_ID = Prius.get(:api_key_id)
+API_KEY_SECRET = Prius.get(:api_key_secret)
+API_ENDPOINT = Prius.get(:api_endpoint)
 
-API_URL = "https://api-staging.gocardless.com"
 HEADERS = {
-  'GoCardless-Version' => '2014-11-03',
+  'GoCardless-Version' => Prius.get(:api_version),
   'Content-Type' => 'application/json'
 }
 
 # Initialize the API client
-API = RestClient::Resource.new(API_URL,
+API = RestClient::Resource.new(API_ENDPOINT,
                                user: API_KEY_ID,
                                password: API_KEY_SECRET,
                                headers: HEADERS)
