@@ -54,7 +54,7 @@ post '/purchase' do
       description: "#{package.capitalize} License - £#{rand(1..5)*50}",
       session_token: session[:token],
       success_redirect_url: success_url,
-      scheme: 'bacs',
+      scheme: params[:scheme],
       links: {
         creditor: CREDITOR_ID
       }
