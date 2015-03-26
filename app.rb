@@ -54,12 +54,13 @@ post '/purchase' do
       description: "#{package.capitalize} License - £#{rand(1..5)*50}",
       session_token: session[:token],
       success_redirect_url: success_url,
-      scheme: params[:scheme],
       links: {
         creditor: CREDITOR_ID
       }
     }
   }
+
+  payload[:redirect_flows][:scheme] = params[:scheme] unless params[:scheme].empty?
 
   response = API['/redirect_flows'].post payload.to_json
   redirect JSON.parse(response)["redirect_flows"]["redirect_url"]
