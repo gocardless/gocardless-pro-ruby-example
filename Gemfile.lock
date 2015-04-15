@@ -1,23 +1,43 @@
+GIT
+  remote: https://2e7e936deecf7af15f95d8090b8b5c90704b0da6:x-oauth-basic@github.com/gocardless/pro-client-ruby
+  revision: e157039021bfae41d9b57a99745b7b2ebb902e8d
+  specs:
+    gocardless (2.0.0)
+      activesupport (~> 4.1)
+      faraday (>= 0.8.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
-    netrc (0.7.9)
+    activesupport (4.2.1)
+      i18n (~> 0.7)
+      json (~> 1.7, >= 1.7.7)
+      minitest (~> 5.1)
+      thread_safe (~> 0.3, >= 0.3.4)
+      tzinfo (~> 1.1)
+    faraday (0.9.1)
+      multipart-post (>= 1.2, < 3)
+    i18n (0.7.0)
+    json (1.8.2)
+    minitest (5.6.0)
+    multipart-post (2.0.0)
     prius (0.2.0)
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
-    rest_client (1.8.2)
-      netrc (~> 0.7.7)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (~> 1.3, >= 1.3.4)
+    thread_safe (0.3.5)
     tilt (1.4.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  gocardless!
   prius (~> 0.2)
-  rest_client
   sinatra

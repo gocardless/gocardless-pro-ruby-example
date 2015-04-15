@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'sinatra'
-require 'rest_client'
 require 'securerandom'
 require 'json'
+
 require 'prius'
+require 'gocardless'
 
 # Enable sessions
 enable :sessions
@@ -16,68 +17,55 @@ Prius.load(:api_key_secret)
 Prius.load(:api_endpoint)
 Prius.load(:api_version)
 
+# Put the environment variables in constants for easier access/reference
 CREDITOR_ID = Prius.get(:creditor_id)
 API_KEY_ID = Prius.get(:api_key_id)
 API_KEY_SECRET = Prius.get(:api_key_secret)
 API_ENDPOINT = Prius.get(:api_endpoint)
-API_VERSION = Prius.get(:api_version)
 
-HEADERS = {
-  'GoCardless-Version' => API_VERSION,
-  'Content-Type' => 'application/json'
-}
-
-# Initialize the API client
-API = RestClient::Resource.new(API_ENDPOINT,
-                               user: API_KEY_ID,
-                               password: API_KEY_SECRET,
-                               headers: HEADERS)
+API_CLIENT = GoCardless::Client.new(
+  api_key: Prius.get(:api_key_id),
+  api_secret: Prius.get(:api_key_secret)
+)
 
 # Before every request, make sure visitors have been assigned a session ID.
 before do
   session[:token] ||= SecureRandom.uuid
 end
 
-# Customer Vists the DVLA
+# Customer visits the site. Hi Customer!
 get '/' do
   erb :index
 end
 
-# DVLA kicks off a redirection flow
+# Customer purchases an item
 post '/purchase' do
   package = params[:package]
+
+  # Generate a success URL. This is where GC will send the customer after they've paid.
   uri = URI.parse(request.env["REQUEST_URI"])
   success_url = "#{uri.scheme}://#{uri.host}/payment_complete?package=#{package}"
 
-  payload = {
-    redirect_flows: {
-      description: "#{package.capitalize} License - £#{rand(1..5)*50}",
-      session_token: session[:token],
-      success_redirect_url: success_url,
-      links: {
-        creditor: CREDITOR_ID
-      }
+
+  redirect_flow = API_CLIENT.redirect_flows.create(
+    description: "#{package.capitalize} License - £#{rand(1..5)*50}",
+    session_token: session[:token],
+    success_redirect_url: success_url,
+    scheme: params[:scheme],
+    links: {
+      creditor: CREDITOR_ID
     }
-  }
-
-  payload[:redirect_flows][:scheme] = params[:scheme] unless params[:scheme].empty?
-
-  response = API['/redirect_flows'].post payload.to_json
-  redirect JSON.parse(response)["redirect_flows"]["redirect_url"]
+  )
+  redirect redirect_flow.redirect_url
 end
 
-# Customer returns from GC flow pages
+# Customer returns from GC's payment pages
 get '/payment_complete' do
+  package = params[:package]
   redirect_flow_id = params[:redirect_flow_id]
 
-  payload = {
-    data: {
-      session_token: session[:token]
-    }
-  }
-
-  API["/redirect_flows/#{redirect_flow_id}/actions/complete"].post payload.to_json
-  redirect "/thankyou?package=#{params[:package]}"
+  API_CLIENT.redirect_flows.complete(rediirect_flow_id, session_token: session[:token])
+  redirect "/thankyou?package=#{package}"
 end
 
 get '/thankyou' do
