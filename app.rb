@@ -25,8 +25,15 @@ API_ENDPOINT = Prius.get(:api_endpoint)
 
 API_CLIENT = GoCardless::Client.new(
   api_key: Prius.get(:api_key_id),
-  api_secret: Prius.get(:api_key_secret)
+  api_secret: Prius.get(:api_key_secret),
+  environment: :sandbox
 )
+
+PACKAGE_PRICES = {
+  "bronze" => { "GBP" => 100, "EUR" => 130 }
+  "silver" => { "GBP" => 500, "EUR" => 700 }
+  "gold" => { "GBP" => 1000, "EUR" => 1300 }
+}
 
 # Before every request, make sure visitors have been assigned a session ID.
 before do
@@ -46,9 +53,8 @@ post '/purchase' do
   uri = URI.parse(request.env["REQUEST_URI"])
   success_url = "#{uri.scheme}://#{uri.host}/payment_complete?package=#{package}"
 
-
   redirect_flow = API_CLIENT.redirect_flows.create(
-    description: "#{package.capitalize} License - £#{rand(1..5)*50}",
+    description: "#{package.capitalize} License",
     session_token: session[:token],
     success_redirect_url: success_url,
     scheme: params[:scheme],
@@ -63,8 +69,37 @@ end
 get '/payment_complete' do
   package = params[:package]
   redirect_flow_id = params[:redirect_flow_id]
+  price = PACKAGE_PRICES.fetch(package)
 
-  API_CLIENT.redirect_flows.complete(rediirect_flow_id, session_token: session[:token])
+  # Complete the redirect flow
+  puts session[:token]
+  puts redirect_flow_id
+
+  completed_redirect_flow = API_CLIENT.redirect_flows.
+    complete(redirect_flow_id, session_token: session[:token])
+
+  mandate = API_CLIENT.mandates.get(completed_redirect_flow.links.mandate)
+
+  # Create the subscription
+  currency = case mandate.scheme
+             when "bacs" then "GBP"
+             when "sepa_core" then "EUR"
+             end
+
+  API_CLIENT.subscriptions.create(
+    amount: price[currency] * 100, # Price in pence/cents
+    currency: currency,
+    name: "Monthly Rental (#{package.capitalize} Package)",
+    interval_unit: "monthly",
+    day_of_month:  "1",
+    metadata: {
+      order_no: SecureRandom.uuid # Could be anything
+    },
+    links: {
+      mandate: mandate.id
+    }
+  )
+
   redirect "/thankyou?package=#{package}"
 end
 

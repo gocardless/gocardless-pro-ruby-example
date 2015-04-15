@@ -1,63 +1,52 @@
-<div class="jumbotron">
-  <h1>License Renewal</h1>
-  <p class="lead">
-    Looks like you're trying to renew your driving license?
-  </p>
-  <p class="lead">
-    <b>You're in luck!</b>
-  </p>
-  <p class="lead">
-    We've just done a seamless integration with GoCardless using their brand spanking new hosted payment pages and they're blooming marvellous.
-  </p>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" style="border-bottom: 3px solid #dddddd">
+  <div class="container">
+    <img src="/images/logo.png" style="max-height: 150px;"/>
+  </div>
 </div>
-<div class="panel panel-info">
-  <div class="panel-heading">Renew your license</div>
-  <div class="panel-body">
-    <form action='/purchase' method='post' class="form">
 
-      <div class="form-group">
-        <label>Which package do you want?</label>
-        <div class="radio">
-          <label>
-            <input type="radio" name="package" value="bronze">
-            <b>Bronze</b> - Straight up license, no bells and whistles here
-          </label>
-        </div>
-
-        <div class="radio">
-          <label>
-            <input type="radio" name="package" value="silver">
-            <b>Silver</b> - You get your license, but we'll photoshop you first
-          </label>
-        </div>
-
-        <div class="radio">
-          <label>
-            <input type="radio" name="package" value="gold">
-            <b>Gold</b> - All of the above, but your license is finished in gold leaf
-          </label>
-        </div>
-
-        <div class="radio">
-          <label>
-            <input type="radio" name="package" value="platinum" checked>
-            <b>Platinum</b> - All of the above, plus kittens
-          </label>
-        </div>
-
-        <div class="select">
-          <label>
-            I want to pay with:
-            <select name="scheme">
-              <option value>I don't mind</option>
-              <option value="bacs">UK Direct Debit</option>
-              <option value="sepa_core">SEPA Direct Debit</option>
-            </select>
-          </label>
-        </div>
-        <hr/>
-        <button type="submit" class="btn btn-success btn-block">BUY</button>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 class="text-center">Professional Wheeler Dealers</h1>
+      <hr/>
+    </div>
+  </div>
+  <!-- Example row of columns -->
+  <div class="row">
+    <div class="col-md-4">
+      <h2 class="text-center">Bronze</h2>
+      <h3 class="text-center">"Naturally air conditioned"</h3>
+      <div class="product-image"><img src="/images/bronze.png" width="100%" /></div>
+      <form action='/purchase' method='post' class="form">
+        <input type="hidden" name="package" value="bronze"/>
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £100/month" />
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-center">Silver</h2>
+      <h3 class="text-center">"Marketplace Traction"</h3>
+      <div class="product-image"><img src="/images/silver.png" width="100%" /></div>
+      <form action='/purchase' method='post' class="form">
+        <input type="hidden" name="package" value="bronze"/>
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £500/month" />
+      </form>
+    </div>
+    <div class="col-md-4">
+      <h2 class="text-center">Gold</h2>
+      <h3 class="text-center">"Powered by the Cloud"</h3>
+      <div class="product-image"><img src="/images/gold.png" width="100%" /></div>
+      <form action='/purchase' method='post' class="form">
+        <input type="hidden" name="package" value="bronze"/>
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £1000/month" />
       </form>
     </div>
   </div>
-</div>
+  <hr/>
+  <footer>
+    <center>
+      Made with ❤ by <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app">view source</a>)
+    </center>
+  </footer>
+
+</div> <!-- /container -->
