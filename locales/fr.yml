@@ -3,6 +3,7 @@ fr:
   rent_for: Rent for %{amount} a month
   made_with: Made with ❤ by
   view_source: view_source
+  package_description: Monthly rental (%{package} package)
   packages:
     bronze:
       name: Bronze
