@@ -1,0 +1,22 @@
+fr:
+  tag_line: Le Professional Wheeler Dealers
+  rent_for: Rent for %{amount} a month
+  made_with: Made with ❤ by
+  view_source: view_source
+  packages:
+    bronze:
+      name: Bronze
+      description: Naturally Air Conditioned
+    silver:
+      name: Silver
+      description: Marketplace Traction
+    gold:
+      name: Gold
+      description: Powered by the Cloud
+  thankyou:
+    purchase_description: You've purchased the %{package} rental package
+    purchase_complete: Purchase Complete
+    enjoy_new_ride: Enjoy your new ride, you've earned it!
+    dd_explanation: We've set up a direct debit and a subscription for %{amount}/month, you should receive an email shortly
+    first_payment: Your first payment will be billed on %{date}
+    rent_something_else: Rent Something Else

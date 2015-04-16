@@ -5,10 +5,12 @@ require 'json'
 
 require 'prius'
 require 'gocardless'
+require 'i18n'
+require 'i18n/backend/fallbacks'
+require 'rack'
+require 'rack/contrib'
 
-# Enable sessions
-enable :sessions
-set :session_secret, 'im_a_secret_yay!'
+require_relative "lib/environment"
 
 # Load Environment Variables
 Prius.load(:creditor_id)
@@ -23,25 +25,48 @@ API_KEY_ID = Prius.get(:api_key_id)
 API_KEY_SECRET = Prius.get(:api_key_secret)
 API_ENDPOINT = Prius.get(:api_endpoint)
 
-API_CLIENT = GoCardless::Client.new(
-  api_key: Prius.get(:api_key_id),
-  api_secret: Prius.get(:api_key_secret),
-  environment: :sandbox
-)
-
 PACKAGE_PRICES = {
   "bronze" => { "GBP" => 100, "EUR" => 130 },
   "silver" => { "GBP" => 500, "EUR" => 700 },
   "gold" => { "GBP" => 1000, "EUR" => 1300 }
 }
 
-# Before every request, make sure visitors have been assigned a session ID.
-before do
-  session[:token] ||= SecureRandom.uuid
+# Internationalisation by browser preference
+use Rack::Locale
+
+# Settings
+set :session_secret, 'im_a_secret_yay!'
+set :api_client, GoCardless::Client.new(
+  api_key: Prius.get(:api_key_id),
+  api_secret: Prius.get(:api_key_secret),
+  environment: :sandbox
+)
+
+# Configuration
+configure do
+  I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
+  I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
+  I18n.backend.load_translations
+  I18n.config.enforce_available_locales = false
+  I18n.default_locale = :en
 end
+
+# Enable sessions and before every request, make sure visitors have been assigned a
+# session ID.
+enable :sessions
+before { session[:token] ||= SecureRandom.uuid }
 
 # Customer visits the site. Hi Customer!
 get '/' do
+  @prices = {}
+
+  PACKAGE_PRICES.each do |package, pricing_hash|
+    @prices[package.to_sym] = case I18n.locale
+      when :fr then "€#{pricing_hash["EUR"]}"
+      else "£#{pricing_hash["GBP"]}"
+      end
+  end
+
   erb :index
 end
 
@@ -53,8 +78,8 @@ post '/purchase' do
   uri = URI.parse(request.env["REQUEST_URI"])
   success_url = "#{uri.scheme}://#{uri.host}/payment_complete?package=#{package}"
 
-  redirect_flow = API_CLIENT.redirect_flows.create(
-    description: "Monthly Rental (#{package.capitalize} Package)",
+  redirect_flow = settings.api_client.redirect_flows.create(
+    description: I18n.t(:package_description, package: package.capitalize),
     session_token: session[:token],
     success_redirect_url: success_url,
     scheme: params[:scheme],
@@ -75,10 +100,10 @@ get '/payment_complete' do
   puts session[:token]
   puts redirect_flow_id
 
-  completed_redirect_flow = API_CLIENT.redirect_flows.
+  completed_redirect_flow = settings.api_client.redirect_flows.
     complete(redirect_flow_id, session_token: session[:token])
 
-  mandate = API_CLIENT.mandates.get(completed_redirect_flow.links.mandate)
+  mandate = settings.api_client.mandates.get(completed_redirect_flow.links.mandate)
 
   # Create the subscription
   currency = case mandate.scheme
@@ -86,10 +111,10 @@ get '/payment_complete' do
              when "sepa_core" then "EUR"
              end
 
-  subscription = API_CLIENT.subscriptions.create(
+  subscription = settings.api_client.subscriptions.create(
     amount: price[currency] * 100, # Price in pence/cents
     currency: currency,
-    name: "Monthly Rental (#{package.capitalize} Package)",
+    name: I18n.t(:package_description, package: package.capitalize),
     interval_unit: "monthly",
     day_of_month:  "1",
     metadata: {
@@ -104,15 +129,17 @@ get '/payment_complete' do
 end
 
 get '/thankyou' do
-  @package = params[:package]
-  subscription = API_CLIENT.subscriptions.get(params[:subscription_id])
+  package = params[:package]
+  subscription = settings.api_client.subscriptions.get(params[:subscription_id])
   currency = subscription.currency
 
   currency_symbol = case currency
                     when "GBP" then "£"
                     when "EUR" then "€"
                     end
-  @price = "#{currency_symbol}#{"%.2f" % PACKAGE_PRICES[@package][currency]}"
+  @price = "#{currency_symbol}#{"%.2f" % PACKAGE_PRICES[package][currency]}"
   @first_payment_date = subscription.upcoming_payments.first[:charge_date]
+  @package = package
+
   erb :thankyou
 end
