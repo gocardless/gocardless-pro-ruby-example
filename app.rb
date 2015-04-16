@@ -54,7 +54,7 @@ post '/purchase' do
   success_url = "#{uri.scheme}://#{uri.host}/payment_complete?package=#{package}"
 
   redirect_flow = API_CLIENT.redirect_flows.create(
-    description: "#{package.capitalize} License",
+    description: "Monthly Rental (#{package.capitalize} Package)",
     session_token: session[:token],
     success_redirect_url: success_url,
     scheme: params[:scheme],
