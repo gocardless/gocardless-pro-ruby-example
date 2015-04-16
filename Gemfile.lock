@@ -1,6 +1,6 @@
 GIT
   remote: https://2e7e936deecf7af15f95d8090b8b5c90704b0da6:x-oauth-basic@github.com/gocardless/pro-client-ruby
-  revision: 3a520daee04960b081c401dab593252fe307f006
+  revision: 7ef5e1fc299a193c7fe89eac8fa30199c8b8cfc1
   specs:
     gocardless (2.0.0)
       activesupport (~> 4.1)
