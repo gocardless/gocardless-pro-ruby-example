@@ -1,6 +1,6 @@
 GIT
   remote: https://2e7e936deecf7af15f95d8090b8b5c90704b0da6:x-oauth-basic@github.com/gocardless/pro-client-ruby
-  revision: e157039021bfae41d9b57a99745b7b2ebb902e8d
+  revision: 3a520daee04960b081c401dab593252fe307f006
   specs:
     gocardless (2.0.0)
       activesupport (~> 4.1)
@@ -25,6 +25,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
+    shotgun (0.9.1)
+      rack (>= 1.0)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -40,4 +42,5 @@ PLATFORMS
 DEPENDENCIES
   gocardless!
   prius (~> 0.2)
+  shotgun
   sinatra
