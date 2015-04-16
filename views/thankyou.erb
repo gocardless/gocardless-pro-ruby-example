@@ -1,15 +1,42 @@
-<div class="jumbotron">
-  <h1>License Renewal</h1>
-  <p class="lead">
-    Congratulations on setting up a direct debit!
-  </p>
-
-  <p class="lead">
-    You now have a <b><%= @package.upcase %></b> license.
-  </p>
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" style="border-bottom: 3px solid #dddddd">
+  <div class="container">
+    <img src="/images/logo.png" style="max-height: 150px;"/>
+  </div>
 </div>
 
-<center>
-<img src="/images/winning.gif" />
-</center>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="alert alert-success">
+        You've purchased the <b><%= @package %></b> rental package<br/>
+      </div>
 
+      <hr/>
+
+      <h1>Purchase Complete</h1>
+      <p class="lead">
+        Enjoy your new ride, you've earned it!
+      </p>
+
+      <div class="product-image">
+        <img src="/images/<%= @package %>.png" height="100%" />
+      </div>
+
+      <p>
+        We've set up a direct debit and a subscription for <b><%= @price %>/month</b>, you should receive an email shortly.<br/>
+      </p>
+      <p>
+        Your first payment will be billed on <%= @first_payment_date %>
+      </p>
+      <br/>
+      <a href="/" class="btn btn-default">Rent Something Else</a>
+    <hr/>
+  </div>
+
+  <footer>
+    <center>
+      Made with ❤ by <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app">view source</a>)
+    </center>
+  </footer>
+</div>

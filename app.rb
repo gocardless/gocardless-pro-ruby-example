@@ -30,8 +30,8 @@ API_CLIENT = GoCardless::Client.new(
 )
 
 PACKAGE_PRICES = {
-  "bronze" => { "GBP" => 100, "EUR" => 130 }
-  "silver" => { "GBP" => 500, "EUR" => 700 }
+  "bronze" => { "GBP" => 100, "EUR" => 130 },
+  "silver" => { "GBP" => 500, "EUR" => 700 },
   "gold" => { "GBP" => 1000, "EUR" => 1300 }
 }
 
@@ -86,7 +86,7 @@ get '/payment_complete' do
              when "sepa_core" then "EUR"
              end
 
-  API_CLIENT.subscriptions.create(
+  subscription = API_CLIENT.subscriptions.create(
     amount: price[currency] * 100, # Price in pence/cents
     currency: currency,
     name: "Monthly Rental (#{package.capitalize} Package)",
@@ -100,10 +100,19 @@ get '/payment_complete' do
     }
   )
 
-  redirect "/thankyou?package=#{package}"
+  redirect "/thankyou?package=#{package}&subscription_id=#{subscription.id}"
 end
 
 get '/thankyou' do
   @package = params[:package]
+  subscription = API_CLIENT.subscriptions.get(params[:subscription_id])
+  currency = subscription.currency
+
+  currency_symbol = case currency
+                    when "GBP" then "£"
+                    when "EUR" then "€"
+                    end
+  @price = "#{currency_symbol}#{"%.2f" % PACKAGE_PRICES[@package][currency]}"
+  @first_payment_date = subscription.upcoming_payments.first[:charge_date]
   erb :thankyou
 end
