@@ -9,14 +9,14 @@
   <div class="row">
     <div class="col-md-12 text-center">
       <div class="alert alert-success">
-        You've purchased the <b><%= @package %></b> rental package<br/>
+        <%= I18n.t(:purchase_description, scope: [:thankyou], package: I18n.t(:name, scope: [:packages, @package])) %><br/>
       </div>
 
       <hr/>
 
-      <h1>Purchase Complete</h1>
+      <h1><%= I18n.t(:purchase_complete, scope: [:thankyou]) %></h1>
       <p class="lead">
-        Enjoy your new ride, you've earned it!
+        <%= I18n.t(:enjoy_new_ride, scope: [:thankyou]) %>
       </p>
 
       <div class="product-image">
@@ -24,19 +24,19 @@
       </div>
 
       <p>
-        We've set up a direct debit and a subscription for <b><%= @price %>/month</b>, you should receive an email shortly.<br/>
+        <%= I18n.t(:dd_explanation, scope: [:thankyou], amount: @price) %><br/>
       </p>
       <p>
-        Your first payment will be billed on <%= @first_payment_date %>
+      <%= I18n.t(:first_payment, scope: [:thankyou], date: @first_payment_date) %>
       </p>
       <br/>
-      <a href="/" class="btn btn-default">Rent Something Else</a>
+      <a href="/" class="btn btn-default"><%= I18n.t(:rent_something_else, scope: [:thankyou]) %></a>
     <hr/>
   </div>
 
   <footer>
     <center>
-      Made with ❤ by <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app">view source</a>)
+      <%= I18n.t(:made_with) %> <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app"><%= I18n.t(:view_source) %></a>)
     </center>
   </footer>
 </div>

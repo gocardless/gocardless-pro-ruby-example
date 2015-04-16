@@ -23,6 +23,8 @@ GEM
     multipart-post (2.0.0)
     prius (0.2.0)
     rack (1.5.2)
+    rack-contrib (1.2.0)
+      rack (>= 0.9.1)
     rack-protection (1.5.1)
       rack
     shotgun (0.9.1)
@@ -41,6 +43,8 @@ PLATFORMS
 
 DEPENDENCIES
   gocardless!
+  i18n
   prius (~> 0.2)
+  rack-contrib
   shotgun
   sinatra

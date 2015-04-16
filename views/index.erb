@@ -8,45 +8,45 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1 class="text-center">Professional Wheeler Dealers</h1>
+      <h1 class="text-center"><%= I18n.t("tag_line") %></h1>
       <hr/>
     </div>
   </div>
-  <!-- Example row of columns -->
+
   <div class="row">
     <div class="col-md-4">
-      <h2 class="text-center">Bronze</h2>
-      <h3 class="text-center">"Naturally air conditioned"</h3>
+      <h2 class="text-center"><%= I18n.t(:name, scope: [:packages, :bronze]) %></h2>
+      <h3 class="text-center">"<%= I18n.t(:description, scope: [:packages, :bronze]) %>"</h3>
       <div class="product-image"><img src="/images/bronze.png" width="100%" /></div>
       <form action='/purchase' method='post' class="form">
         <input type="hidden" name="package" value="bronze"/>
-        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £100/month" />
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="<%= I18n.t(:rent_for, amount: @prices[:bronze]) %>" />
       </form>
     </div>
     <div class="col-md-4">
-      <h2 class="text-center">Silver</h2>
-      <h3 class="text-center">"Marketplace Traction"</h3>
+      <h2 class="text-center"><%= I18n.t(:name, scope: [:packages, :silver]) %></h2>
+      <h3 class="text-center">"<%= I18n.t(:description, scope: [:packages, :silver]) %>"</h3>
       <div class="product-image"><img src="/images/silver.png" width="100%" /></div>
       <form action='/purchase' method='post' class="form">
         <input type="hidden" name="package" value="silver"/>
-        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £500/month" />
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="<%= I18n.t(:rent_for, amount: @prices[:silver]) %>" />
       </form>
     </div>
     <div class="col-md-4">
-      <h2 class="text-center">Gold</h2>
-      <h3 class="text-center">"Powered by the Cloud"</h3>
+      <h2 class="text-center"><%= I18n.t(:name, scope: [:packages, :gold]) %></h2>
+      <h3 class="text-center">"<%= I18n.t(:description, scope: [:packages, :gold]) %>"</h3>
       <div class="product-image"><img src="/images/gold.png" width="100%" /></div>
       <form action='/purchase' method='post' class="form">
         <input type="hidden" name="package" value="gold"/>
-        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="Rent for £1000/month" />
+        <input type="submit" class="btn btn-default btn-lg btn-block" href="#" role="button" value="<%= I18n.t(:rent_for, amount: @prices[:gold]) %>" />
       </form>
     </div>
   </div>
   <hr/>
   <footer>
     <center>
-      Made with ❤ by <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app">view source</a>)
+      <%= I18n.t(:made_with) %> <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app"><%= I18n.t(:view_source) %></a>)
     </center>
   </footer>
 
-</div> <!-- /container -->
+</div>
