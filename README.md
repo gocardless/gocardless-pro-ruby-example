@@ -7,6 +7,6 @@ A simple demo of using the GoCardless Pro redirect flow to serve hosted payment 
     git clone https://github.com/gocardless/flow-demo-app
     cd flow-demo-app
     bundle install
-    API_KEY_ID=x API_KEY_SECRET=x CREDITOR_ID=x API_ENDPOINT=https://api-staging.gocardless.com API_VERSION=2014-11-03 bundle exec ruby app.rb
+    API_KEY_ID=XXX API_KEY_SECRET=XXX CREDITOR_ID=XXX bundle exec shotgun app.rb
 
-Then open [http://localhost:4567/](http://localhost:4567/)
+Then open [http://localhost:9393/](http://localhost:9393/)
