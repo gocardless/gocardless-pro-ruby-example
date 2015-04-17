@@ -1,23 +1,23 @@
 fr:
-  tag_line: Le Professional Wheeler Dealers
-  rent_for: Rent for %{amount} a month
-  made_with: Made with ❤ by
-  view_source: view_source
-  package_description: Monthly rental (%{package} package)
+  tag_line: Location de Véhicule Professionnel
+  rent_for: Louer pour %{amount} par mois
+  made_with: Faite avec ❤ by
+  view_source: voir la source
+  package_description: Location mensuelle (paquet de %{package})
   packages:
     bronze:
       name: Bronze
-      description: Naturally Air Conditioned
+      description: Naturellement Climatisé
     silver:
-      name: Silver
-      description: Marketplace Traction
+      name: Argent
+      description: Traction du Marché
     gold:
-      name: Gold
-      description: Powered by the Cloud
+      name: Or
+      description: Propulsé par le Cloud
   thankyou:
-    purchase_description: You've purchased the %{package} rental package
-    purchase_complete: Purchase Complete
-    enjoy_new_ride: Enjoy your new ride, you've earned it!
-    dd_explanation: We've set up a direct debit and a subscription for %{amount}/month, you should receive an email shortly
-    first_payment: Your first payment will be billed on %{date}
-    rent_something_else: Rent Something Else
+    purchase_description: Vous avez acheté le paquet de %{package}
+    purchase_complete: Achetez complète
+    enjoy_new_ride: Profitez de votre nouvelle voiture!
+    dd_explanation: Nous avons mis en place un abonnement pour %{amount} par mois, vous devriez recevoir rapidement un message.
+    first_payment: Votre premier paiement sera facturé sur %{date}
+    rent_something_else: Louer une autre chose
