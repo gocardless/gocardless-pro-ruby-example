@@ -62,9 +62,9 @@ get '/' do
 
   PACKAGE_PRICES.each do |package, pricing_hash|
     @prices[package.to_sym] = case I18n.locale
-      when :fr then "€#{pricing_hash["EUR"]}"
-      else "£#{pricing_hash["GBP"]}"
-      end
+                              when :fr then "€#{pricing_hash["EUR"]}"
+                              else "£#{pricing_hash["GBP"]}"
+                              end
   end
 
   erb :index
@@ -76,7 +76,7 @@ post '/purchase' do
 
   # Generate a success URL. This is where GC will send the customer after they've paid.
   uri = URI.parse(request.env["REQUEST_URI"])
-  success_url = "#{uri.scheme}://#{uri.host}/payment_complete?package=#{package}"
+  success_url = "#{uri.scheme}://#{uri.host}#{":#{uri.port}" unless [80, 443].include?(uri.port)}/payment_complete?package=#{package}"
 
   redirect_flow = settings.api_client.redirect_flows.create(
     description: I18n.t(:package_description, package: package.capitalize),
