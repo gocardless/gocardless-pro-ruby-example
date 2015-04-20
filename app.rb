@@ -15,11 +15,6 @@ Prius.load(:gc_api_key_id)
 Prius.load(:gc_api_key_secret)
 Prius.load(:gc_creditor_id)
 
-# Put the environment variables in constants for easier access/reference
-API_KEY_ID = Prius.get(:gc_api_key_id)
-API_KEY_SECRET = Prius.get(:gc_api_key_secret)
-CREDITOR_ID = Prius.get(:gc_creditor_id)
-
 PACKAGE_PRICES = {
   "bronze" => { "GBP" => 100, "EUR" => 130 },
   "silver" => { "GBP" => 500, "EUR" => 700 },
@@ -79,7 +74,7 @@ post '/purchase' do
     success_redirect_url: success_url,
     scheme: params[:scheme],
     links: {
-      creditor: CREDITOR_ID
+      creditor: Prius.get(:gc_creditor_id)
     }
   )
   redirect redirect_flow.redirect_url
