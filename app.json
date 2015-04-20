@@ -5,7 +5,7 @@
   "logo": "https://gocardless.com/images/logos/gocardless-square.png",
   "success_url": "/",
   "env": {
-    "GC_API_KEY": {
+    "GC_API_KEY_ID": {
       "description": "GoCardless API key"
     },
     "GC_API_SECRET": {
