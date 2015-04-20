@@ -1,0 +1,19 @@
+body {
+  padding-top: 0px;
+}
+
+.main {
+  padding: 40px 15px;
+}
+
+.centered {
+  text-align: center;
+}
+
+.product-image {
+  height: 250px;
+}
+
+h1,h2,h3{
+  font-family: "Georgia"
+}

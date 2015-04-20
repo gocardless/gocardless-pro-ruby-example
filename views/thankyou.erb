@@ -1,0 +1,42 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron" style="border-bottom: 3px solid #dddddd">
+  <div class="container">
+    <img src="/images/logo.png" style="max-height: 150px;"/>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <div class="alert alert-success">
+        <%= I18n.t(:purchase_description, scope: [:thankyou], package: I18n.t(:name, scope: [:packages, @package])) %><br/>
+      </div>
+
+      <hr/>
+
+      <h1><%= I18n.t(:purchase_complete, scope: [:thankyou]) %></h1>
+      <p class="lead">
+        <%= I18n.t(:enjoy_new_ride, scope: [:thankyou]) %>
+      </p>
+
+      <div class="product-image">
+        <img src="/images/<%= @package %>.png" height="100%" />
+      </div>
+
+      <p>
+        <%= I18n.t(:dd_explanation, scope: [:thankyou], amount: @price) %><br/>
+      </p>
+      <p>
+      <%= I18n.t(:first_payment, scope: [:thankyou], date: @first_payment_date) %>
+      </p>
+      <br/>
+      <a href="/" class="btn btn-default"><%= I18n.t(:rent_something_else, scope: [:thankyou]) %></a>
+    <hr/>
+  </div>
+
+  <footer>
+    <center>
+      <%= I18n.t(:made_with) %> <a href="http://gocardless.com">GoCardless Engineering</a> (<a href="http://github.com/gocardless/flow-demo-app"><%= I18n.t(:view_source) %></a>)
+    </center>
+  </footer>
+</div>

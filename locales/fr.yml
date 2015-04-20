@@ -1,0 +1,23 @@
+fr:
+  tag_line: Location de véhicule professionnel
+  rent_for: Louer pour %{amount} par mois
+  made_with: Fait avec ❤ by
+  view_source: voir la source
+  package_description: Location mensuelle (abonnement %{package})
+  packages:
+    bronze:
+      name: Bronze
+      description: Naturellement climatisé
+    silver:
+      name: Argent
+      description: Traction d'avant-garde
+    gold:
+      name: Or
+      description: Propulsé par le cloud
+  thankyou:
+    purchase_description: Vous avez acheté l'abonnement %{package}
+    purchase_complete: Achat terminé
+    enjoy_new_ride: Profitez de votre nouvelle voiture!
+    dd_explanation: Nous avons mis en place un abonnement de %{amount} par mois, vous devriez recevoir rapidement un message.
+    first_payment: Votre premier paiement sera facturé le %{date}
+    rent_something_else: Louer autre chose

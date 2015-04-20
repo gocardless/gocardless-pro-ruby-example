@@ -1,0 +1,18 @@
+{
+  "name": "GoCardless Pro Ruby Example",
+  "description": "Example Ruby application for collecting recurring payments using GoCardless",
+  "repository": "https://github.com/gocardless/gocardless-pro-ruby-example",
+  "logo": "https://gocardless.com/images/logos/gocardless-square.png",
+  "success_url": "/",
+  "env": {
+    "GC_API_KEY": {
+      "description": "GoCardless API key"
+    },
+    "GC_API_SECRET": {
+      "description": "GoCardless API secret"
+    },
+    "GC_CREDITOR_ID": {
+      "description": "GoCardless Creditor ID"
+    }
+  }
+}
