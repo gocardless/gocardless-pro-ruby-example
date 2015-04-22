@@ -4,7 +4,7 @@
 
 This is a simple [Sinatra](http://www.sinatrarb.com/) application that uses the [GoCardless Pro API](https://developer.gocardless.com/pro/) to collect recurring payments for subscriptions using our [redirect flow](https://developer.gocardless.com/pro/#api-endpoints-redirect-flows). It also acts as an example usage of our [ruby client library](https://github.com/gocardless/gocardless-pro-ruby-example)
 
-You can see things running at [https://gocardless-pro-ruby-example.herokuapp.com](https://gocardless-pro-ruby-example.herokuapp.com).
+You can see the app running at [https://gocardless-pro-ruby-example.herokuapp.com](https://gocardless-pro-ruby-example.herokuapp.com).
 
 ## Running the app locally
 
