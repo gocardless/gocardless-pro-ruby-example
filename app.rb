@@ -4,15 +4,15 @@ require 'securerandom'
 require 'json'
 
 require 'prius'
-require 'gocardless-pro'
+require 'gocardless_pro'
 require 'i18n'
 require 'i18n/backend/fallbacks'
 require 'rack'
 require 'rack/contrib'
+require 'pry'
 
 # Load Environment Variables
-Prius.load(:gc_api_key_id)
-Prius.load(:gc_api_key_secret)
+Prius.load(:gc_access_token)
 Prius.load(:gc_creditor_id)
 
 PACKAGE_PRICES = {
@@ -26,9 +26,8 @@ use Rack::Locale
 
 # Settings
 set :session_secret, 'im_a_secret_yay!'
-set :api_client, GoCardless::Client.new(
-  api_key: Prius.get(:gc_api_key_id),
-  api_secret: Prius.get(:gc_api_key_secret),
+set :api_client, GoCardlessPro::Client.new(
+  access_token: Prius.get(:gc_access_token),
   environment: :sandbox
 )
 
@@ -68,7 +67,7 @@ post '/purchase' do
   uri = URI.parse(request.env["REQUEST_URI"])
   success_url = "#{uri.scheme}://#{uri.host}#{":#{uri.port}" unless [80, 443].include?(uri.port)}/payment_complete?package=#{package}"
 
-  redirect_flow = settings.api_client.redirect_flows.create(
+  redirect_flow = settings.api_client.redirect_flows.create(params: {
     description: I18n.t(:package_description, package: package.capitalize),
     session_token: session[:token],
     success_redirect_url: success_url,
@@ -76,7 +75,7 @@ post '/purchase' do
     links: {
       creditor: Prius.get(:gc_creditor_id)
     }
-  )
+  })
   redirect redirect_flow.redirect_url
 end
 
@@ -91,7 +90,7 @@ get '/payment_complete' do
   puts redirect_flow_id
 
   completed_redirect_flow = settings.api_client.redirect_flows.
-    complete(redirect_flow_id, session_token: session[:token])
+    complete(redirect_flow_id, params: { session_token: session[:token] })
 
   mandate = settings.api_client.mandates.get(completed_redirect_flow.links.mandate)
 
@@ -101,7 +100,7 @@ get '/payment_complete' do
              when "sepa_core" then "EUR"
              end
 
-  subscription = settings.api_client.subscriptions.create(
+  subscription = settings.api_client.subscriptions.create(params: {
     amount: price[currency] * 100, # Price in pence/cents
     currency: currency,
     name: I18n.t(:package_description, package: package.capitalize),
@@ -113,7 +112,7 @@ get '/payment_complete' do
     links: {
       mandate: mandate.id
     }
-  )
+  })
 
   redirect "/thankyou?package=#{package}&subscription_id=#{subscription.id}"
 end
@@ -128,7 +127,7 @@ get '/thankyou' do
                     when "EUR" then "€"
                     end
   @price = "#{currency_symbol}#{"%.2f" % PACKAGE_PRICES[package][currency]}"
-  @first_payment_date = subscription.upcoming_payments.first[:charge_date]
+  @first_payment_date = subscription.upcoming_payments.first["charge_date"]
   @package = package
 
   erb :thankyou
