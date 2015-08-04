@@ -13,7 +13,6 @@ require 'pry'
 
 # Load Environment Variables
 Prius.load(:gc_access_token)
-Prius.load(:gc_creditor_id)
 
 PACKAGE_PRICES = {
   "bronze" => { "GBP" => 100, "EUR" => 130 },
@@ -72,9 +71,6 @@ post '/purchase' do
     session_token: session[:token],
     success_redirect_url: success_url,
     scheme: params[:scheme],
-    links: {
-      creditor: Prius.get(:gc_creditor_id)
-    }
   })
   redirect redirect_flow.redirect_url
 end
@@ -86,9 +82,6 @@ get '/payment_complete' do
   price = PACKAGE_PRICES.fetch(package)
 
   # Complete the redirect flow
-  puts session[:token]
-  puts redirect_flow_id
-
   completed_redirect_flow = settings.api_client.redirect_flows.
     complete(redirect_flow_id, params: { session_token: session[:token] })
 

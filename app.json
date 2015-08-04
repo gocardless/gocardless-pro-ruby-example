@@ -5,14 +5,8 @@
   "logo": "https://gocardless.com/images/logos/gocardless-square.png",
   "success_url": "/",
   "env": {
-    "GC_API_KEY_ID": {
-      "description": "GoCardless API key"
-    },
-    "GC_API_SECRET": {
-      "description": "GoCardless API secret"
-    },
-    "GC_CREDITOR_ID": {
-      "description": "GoCardless Creditor ID"
+    "GC_ACCESS_TOKEN": {
+      "description": "GoCardless access token"
     }
   }
 }
