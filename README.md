@@ -16,7 +16,6 @@ cd flow-demo-app
 bundle install
 
 export GC_ACCESS_TOKEN=...
-export GC_CREDITOR_ID=...
 bundle exec shotgun app.rb
 ```
 
