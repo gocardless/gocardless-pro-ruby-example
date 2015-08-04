@@ -4,7 +4,7 @@ GEM
     coderay (1.1.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
-    gocardless_pro (1.0.0)
+    gocardless_pro (1.0.1)
       faraday (>= 0.8.9, < 0.10)
     i18n (0.7.0)
     method_source (0.8.2)
@@ -32,7 +32,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gocardless_pro (~> 1.0.0)
+  gocardless_pro (~> 1.0)
   i18n
   prius (~> 0.2)
   pry
@@ -41,4 +41,4 @@ DEPENDENCIES
   sinatra
 
 BUNDLED WITH
-   1.10.4
+   1.10.5

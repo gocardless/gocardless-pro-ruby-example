@@ -7,4 +7,4 @@ gem "i18n"            # Translations
 gem "rack-contrib"    # Internationalisation (Rack::Locale)
 gem "shotgun"         # Hot code reload
 
-gem "gocardless_pro", "~> 1.0.0"
+gem "gocardless_pro", "~> 1.0"
