@@ -12,7 +12,7 @@ GEM
     method_source (0.9.0)
     multipart-post (2.0.0)
     mustermann (1.0.1)
-    prius (0.2.0)
+    prius (2.0.0)
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
@@ -36,7 +36,7 @@ PLATFORMS
 DEPENDENCIES
   gocardless_pro (= 2.5.0)
   i18n
-  prius (~> 0.2)
+  prius (~> 2.0)
   pry
   rack-contrib
   shotgun
