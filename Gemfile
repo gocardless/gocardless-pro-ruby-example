@@ -1,5 +1,7 @@
 source "https://rubygems.org"
 
+ruby "2.5.0"
+
 gem "pry"
 gem "sinatra"         # Web server
 gem "prius", "~> 0.2" # For environment variables
