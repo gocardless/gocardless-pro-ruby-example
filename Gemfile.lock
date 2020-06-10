@@ -3,10 +3,10 @@ GEM
   specs:
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
-    faraday (0.17.3)
+    faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
-    gocardless_pro (2.18.0)
-      faraday (>= 0.9.2, < 1.0)
+    gocardless_pro (2.22.0)
+      faraday (>= 0.9.2, < 2)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
@@ -36,7 +36,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gocardless_pro (= 2.18.0)
+  gocardless_pro (= 2.22.0)
   i18n
   prius (~> 2.0)
   pry
