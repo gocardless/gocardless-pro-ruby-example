@@ -125,3 +125,7 @@ get '/thankyou' do
 
   erb :thankyou
 end
+
+get '/drop-in' do
+  redirect "https://payment-pages-demo.herokuapp.com/dropin_example/new"
+end
